@@ -131,6 +131,60 @@ class Program
             Console.WriteLine(highDollar);
 
 
+    //*********************************************************************************************************************************
+
+
+                                                // Partitioning Operations
+
+            List<int> wheresSquaredo = new List<int>()
+            {
+                66, 12, 8, 27, 82, 34, 7, 50, 19, 46, 81, 23, 30, 4, 68, 14
+            };
+            /*
+                Store each number in the following List until a perfect square
+                is detected.
+
+                Expected output is { 66, 12, 8, 27, 82, 34, 7, 50, 19, 46 } 
+
+                Ref: https://msdn.microsoft.com/en-us/library/system.math.sqrt(v=vs.110).aspx
+            */
+
+            List<int> imperfectSquares = new List<int>();
+
+/*             wheresSquaredo.ForEach(currentInt => {
+            double theSquare = Math.Sqrt(currentInt); */
+
+
+/*             if (theSquare % 1 != 0) {
+                imperfectSquares.Add(currentInt);
+            }
+            else
+            {
+                return;
+            }
+
+            }); */
+
+            Console.WriteLine("\n\n\t\tList Up To (excluding) First Perfect Square:\n");
+
+            for (int i = 0; i < wheresSquaredo.Count; i++) 
+            {
+            double theSquare = Math.Sqrt(wheresSquaredo[i]);
+            if (theSquare % 1 == 0) 
+            {
+                break;
+            }
+            imperfectSquares.Add(wheresSquaredo[i]);
+            }
+
+            imperfectSquares.ForEach(n => {
+                
+                Console.Write(n + " ");
+            
+            });
+            
+
+
 
     }
 }
