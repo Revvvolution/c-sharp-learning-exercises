@@ -30,7 +30,11 @@ namespace plan_your_heist
             // A List to store the SkillLevel Values separately
             List<int> teamSkillLevels = new List<int>();
 
-            int bankDifficultyLevel = 100;
+            int bankDifficulty = 100;  //Int32.Parse(Console.ReadLine())
+
+            int luckValue = new Random().Next(-10, 10);
+
+            int bankLevel = bankDifficulty + luckValue;
 
 
             while (true)
@@ -54,16 +58,17 @@ namespace plan_your_heist
             Console.WriteLine($"\n\n\n\t\t\t***************************\n\t\t\t\tHeist Team:\n\t\t\t***************************  \n\t\t\t\t{team.Count} member(s)\n\n");
             foreach (var member in team.Values)
             {
-                Console.WriteLine($"\t      {member.Name} , Skill Level: {member.SkillLevel} , Courage Factor: {member.CourageFactor}");
+                Console.WriteLine($"\t\t{member.Name} , Skill Level: {member.SkillLevel} , Courage Factor: {member.CourageFactor}");
                 
             }
 
             // Display the team's total skill level and compare it to the bank's difficulty level
-            Console.WriteLine($"\n\n\t\t\tTotal Team Skill Level: {totalTeamSkillLevel}\n");
+            Console.WriteLine($"\n\t\t\t\t    ****\n\n\t\t     Team's Combined Skill Level: {totalTeamSkillLevel}\n");
+            Console.WriteLine($"\t\t     Bank Difficulty Level: {bankLevel}\n\n\t\t\t\t    ****\n");
 
-            Console.WriteLine("\n\t*****  Result of Attempt With Current Team:  *****\n\n");
+            Console.WriteLine("\n\t     *****  Result of Attempt With Current Team:  *****\n\n");
 
-            if (totalTeamSkillLevel >= bankDifficultyLevel)
+            if (totalTeamSkillLevel >= bankLevel)
             {
                 Console.WriteLine("  Incredible heist! Successful asset acquisition.");
             }
