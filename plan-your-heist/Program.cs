@@ -61,6 +61,16 @@ namespace plan_your_heist
             // Display the team's total skill level and compare it to the bank's difficulty level
             Console.WriteLine($"\n\n\t\t\tTotal Team Skill Level: {totalTeamSkillLevel}\n");
 
+            Console.WriteLine("\n\t*****  Result of Attempt With Current Team:  *****\n\n");
+
+            if (totalTeamSkillLevel >= bankDifficultyLevel)
+            {
+                Console.WriteLine("  Incredible heist! Successful asset acquisition.");
+            }
+            else
+            {
+                Console.WriteLine("  Failed! Errbody gone...");
+            }
 
         }
 
