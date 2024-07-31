@@ -89,7 +89,7 @@ namespace plan_your_heist
                 Console.WriteLine("\n\n\t---------------------------------------------------------------------\n");
             }
             double totalPlays = wins + losses;
-            double winRate = (wins/totalPlays) * 100;
+            double winRate = wins/totalPlays * 100;
             Console.WriteLine($"\n\t\t\t   Success Percentage:   {Math.Round(winRate, 2)}%\n");
 
 
