@@ -30,7 +30,8 @@ namespace plan_your_heist
             // A List to store the SkillLevel Values separately
             List<int> teamSkillLevels = new List<int>();
 
-            int bankDifficulty = 100;
+            Console.WriteLine("\nEnter the difficulty of the bank for the heist:\n");
+            int bankDifficulty = Int32.Parse(Console.ReadLine()!);
 
 
             while (true)
@@ -90,11 +91,26 @@ namespace plan_your_heist
             }
             double totalPlays = wins + losses;
             double winRate = wins/totalPlays * 100;
-            Console.WriteLine($"\n\t\t\t   Success Percentage:   {Math.Round(winRate, 2)}%\n");
+            Console.WriteLine($"\n\t\t   Successful runs: {wins}    Failed runs: {losses}");
+            Console.WriteLine($"\n\t\t\t   Success Rate:   {Math.Round(winRate, 2)}%\n");
+
+            if (wins > losses)
+            {
+                Console.WriteLine("\n\n\t\t\t     GO FOR IT!!!\n");
+            }
+            else if (wins == losses)
+            {
+                Console.WriteLine("\n\n\t\t   FLIP A COIN - THIS ONE'S A TOSS UP!!!");
+            }
+            else
+            {
+                Console.WriteLine("\n\n\t\t       DON'T DO IT...TOO RISKY!!!");
+            }
 
 
 
         }
+
 
         static TeamMember GetTeamMemberInfo()
         {
