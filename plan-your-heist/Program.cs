@@ -30,11 +30,7 @@ namespace plan_your_heist
             // A List to store the SkillLevel Values separately
             List<int> teamSkillLevels = new List<int>();
 
-            int bankDifficulty = 100;  //Int32.Parse(Console.ReadLine())
-
-            int luckValue = new Random().Next(-10, 10);
-
-            int bankLevel = bankDifficulty + luckValue;
+            int bankDifficulty = 100;
 
 
             while (true)
@@ -63,19 +59,40 @@ namespace plan_your_heist
             }
 
             // Display the team's total skill level and compare it to the bank's difficulty level
-            Console.WriteLine($"\n\t\t\t\t    ****\n\n\t\t     Team's Combined Skill Level: {totalTeamSkillLevel}\n");
-            Console.WriteLine($"\t\t     Bank Difficulty Level: {bankLevel}\n\n\t\t\t\t    ****\n");
+            Console.WriteLine("\n\nHow many times would you like to play?");
+            int plays = Int32.Parse(Console.ReadLine()!);
+            int wins = 0;
+            int losses = 0;
 
-            Console.WriteLine("\n\t     *****  Result of Attempt With Current Team:  *****\n\n");
+            for (int i = 0; i < plays; i++)
+            {
+                int luckValue = new Random().Next(-10, 10);
 
-            if (totalTeamSkillLevel >= bankLevel)
-            {
-                Console.WriteLine("  Incredible heist! Successful asset acquisition.");
+                int bankLevel = bankDifficulty + luckValue;
+
+                Console.WriteLine($"\n\t\t\t\t    ****\n\n\t\t     Team's Combined Skill Level: {totalTeamSkillLevel}\n");
+                Console.WriteLine($"\t\t     Bank Difficulty Level: {bankLevel}\n\n\t\t\t\t    ****\n");
+
+                Console.WriteLine("\n\t     *****  Result of Attempt With Current Team:  *****\n\n");
+
+                if (totalTeamSkillLevel >= bankLevel)
+                {
+                    Console.WriteLine("  Incredible heist! Successful asset acquisition.");
+                    wins ++;
+                }
+                else
+                {
+                    Console.WriteLine("  Failed! Errbody gone...");
+                    losses ++;
+                }
+                Console.WriteLine($"\tWins: {wins}  Losses: {losses}");
+                Console.WriteLine("\n\n\t---------------------------------------------------------------------\n");
             }
-            else
-            {
-                Console.WriteLine("  Failed! Errbody gone...");
-            }
+            double totalPlays = wins + losses;
+            double winRate = (wins/totalPlays) * 100;
+            Console.WriteLine($"\n\t\t\t   Success Percentage:   {Math.Round(winRate, 2)}%\n");
+
+
 
         }
 
