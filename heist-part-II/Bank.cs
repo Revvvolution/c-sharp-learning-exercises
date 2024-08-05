@@ -31,7 +31,7 @@ public class Bank
         var scores = values.OrderBy(x => x.Value);
         List<KeyValuePair<string, int>> keyValuePairs = scores.ToList();
 
-        Console.WriteLine($"Most Secure: {keyValuePairs[-1].Key}");
+        Console.WriteLine($"Most Secure: {keyValuePairs[2].Key}");
         Console.WriteLine($"Least Secure:{keyValuePairs[0].Key}");
 
     }

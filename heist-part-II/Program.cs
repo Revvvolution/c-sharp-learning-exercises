@@ -32,7 +32,7 @@ namespace heist_part_II
                 new Muscle{
                     Name = "Barry",
                     SkillLevel = 90,
-                    PercentageCut = 0
+                    PercentageCut = 1
                 },
                 new Muscle{
                     Name = "Dan",
@@ -78,7 +78,7 @@ namespace heist_part_II
                 {
                     break;
                 }
-                Console.WriteLine("What is their specialty?");
+                Console.WriteLine("What is their speciality?");
                 Console.WriteLine("1) Hacker (Disables alarms)");
                 Console.WriteLine("2) Lock Pick (Cracks vault)");
                 Console.WriteLine("3) Muscle (Disarms guards)");
@@ -133,7 +133,7 @@ namespace heist_part_II
 
             // Print out a report of the rolodex that includes each person's name, specialty, skill level, and cut. Include an index in the report for each operative so that the user can select them by that index in the next step. (You may want to update the IRobber interface and/or the implementing classes to be able to print out the specialty)
 
-             // Create a new List<IRobber> and store it in a variable called crew. Prompt the user to enter the index of the operative they'd like to include in the heist. Once the user selects an operative, add them to the crew list.
+            // Create a new List<IRobber> and store it in a variable called crew. Prompt the user to enter the index of the operative they'd like to include in the heist. Once the user selects an operative, add them to the crew list.
 
             // Allow the user to select as many crew members as they'd like from the rolodex. Continue to print out the report after each crew member is selected, but the report should not include operatives that have already been added to the crew, or operatives that require a percentage cut that can't be offered.
 
@@ -141,21 +141,58 @@ namespace heist_part_II
             //creating if/else to make sure no duplicate crew members, and to make sure percentage of cut can be offered
             //to store crew who is doing the current heist
             List<IRobber> crew = new List<IRobber>();
+            Console.WriteLine("Let's assemble our crew");
             while (true)
             {
-
-
                 for (int i = 0; i < rolodex.Count; i++)
                 {
-                    Console.WriteLine($"Press {i + 1} for:");
-                    Console.WriteLine($"Name: {rolodex[i].Name}");
-                    Console.WriteLine($"Job: {rolodex[i].Job}");
-                    Console.WriteLine($"Name: {rolodex[i].SkillLevel}");
-                    Console.WriteLine($"Name: {rolodex[i].PercentageCut}");
+                    
+                    int percentSum = crew.Sum(x => x.PercentageCut);
+                    if (!crew.Any(x => x.Name == rolodex[i].Name))
+                    {
+                        if(percentSum + rolodex[i].PercentageCut <= 100)
+                        {
+                        Console.WriteLine($"Press {i + 1} for:");
+                        Console.WriteLine($"Name: {rolodex[i].Name}");
+                        Console.WriteLine($"Job: {rolodex[i].Job}");
+                        Console.WriteLine($"Skill Level: {rolodex[i].SkillLevel}");
+                        Console.WriteLine($"Cut: {rolodex[i].PercentageCut}");
+                        }
+                    }
                 }
+                Console.WriteLine("Please select a number to add them to our crew or press to continue:");
+                string pick = Console.ReadLine();
+                if(pick == "")
+                {
+                    break;
+                }
+                crew.Add(rolodex[int.Parse(pick) - 1]);
             }
-           
+            Console.WriteLine("Let's rob a bank!");
 
+            //each crew member would perform their skill on the bank
+            foreach(IRobber crewMember in crew)
+            {
+                crewMember.PerformSkill(newBank);
+            }
+
+            if(newBank.IsSecure)
+            {
+                Console.WriteLine("Sad. You didn't get the money");
+            }
+            else
+            {
+                Console.WriteLine("This heist was successful.");
+                Console.WriteLine("Each member's cut:");
+                Console.WriteLine(newBank.CashOnHand);
+
+                foreach(IRobber crewMember in crew)
+                {
+                    double cut = newBank.CashOnHand / 100 * crewMember.PercentageCut;
+                    Console.WriteLine($"{crewMember.Name} would get ${cut}");
+                }
+                Console.WriteLine($"You were left with {newBank.CashOnHand / 100 * crew.Sum(x => x.PercentageCut)}");
+            }
             // Once the user enters a blank value for a crew member, we're ready to begin the heist. Each crew member should perform his/her skill on the bank. Afterwards, evaluate if the bank is secure. If not, the heist was a success! Print out a success message to the user. If the bank does still have positive values for any of its security properties, the heist was a failure. Print out a failure message to the user.
 
             // If the heist was a success, print out a report of each members' take, along with how much money is left for yourself.
